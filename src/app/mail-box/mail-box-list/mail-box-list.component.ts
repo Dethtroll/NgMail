@@ -1,5 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { MailBoxListService } from './mail-box-list.service'
+import { MailBoxListService } from './mail-box-list.service';
+
+import { MailBox } from './../../domain/mailBox'
+
+import { Observable } from "rxjs/Observable";
+import 'rxjs/add/operator/map'
 
 @Component({
   selector: 'app-mail-box-list',
@@ -8,13 +13,14 @@ import { MailBoxListService } from './mail-box-list.service'
   providers: [MailBoxListService]
 })
 export class MailBoxListComponent implements OnInit {
-  mailBoxes: string[];
+  mailBoxes: MailBox[];
 
   constructor(private listService: MailBoxListService) { }
 
   ngOnInit() {
+    this.mailBoxes = [];
     this.listService.get()
-      .subscribe(items => this.mailBoxes = items as string[]);
+      .subscribe(item => this.mailBoxes.push(item));
   }
 
 }

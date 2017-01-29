@@ -14,6 +14,7 @@ import { MailBoxListComponent } from './mail-box/mail-box-list/mail-box-list.com
 // определение маршрутов
 const appRoutes: Routes =[
     { path: '', component: MailBoxComponent},
+    { path: 'mailbox/:id', component: MailBoxComponent},
     { path: 'addresses', component: AddressBookComponent},
     { path: 'new', component: MessageEditorComponent},
     { path: 'view', component: MessageViewerComponent}//,
@@ -33,7 +34,7 @@ const appRoutes: Routes =[
     BrowserModule,
     FormsModule,
     HttpModule,
-    RouterModule.forRoot(appRoutes)
+    RouterModule.forRoot(appRoutes, {useHash: true})
   ],
   providers: [],
   bootstrap: [AppComponent]
