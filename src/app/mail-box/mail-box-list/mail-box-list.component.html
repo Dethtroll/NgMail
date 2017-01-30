@@ -1,3 +1,3 @@
   <ul>
-    <li *ngFor="let mailBox of mailBoxes">{{mailBox.title}}</li>
+    <li *ngFor="let mailBox of mailBoxes"><a [routerLink]="['/mailbox', mailBox.title]" routerLinkActive="active">{{mailBox.title}}</a></li>
   </ul>

@@ -10,14 +10,18 @@ import { MessageEditorComponent } from './message-editor/message-editor.componen
 import { MessageViewerComponent } from './message-viewer/message-viewer.component';
 import { MailBoxComponent } from './mail-box/mail-box.component';
 import { MailBoxListComponent } from './mail-box/mail-box-list/mail-box-list.component';
+import { MailBoxLettersListComponent } from './mail-box/mail-box-letters-list/mail-box-letters-list.component';
 
 // определение маршрутов
 const appRoutes: Routes =[
     { path: '', component: MailBoxComponent},
-    { path: 'mailbox/:id', component: MailBoxComponent},
-    { path: 'addresses', component: AddressBookComponent},
-    { path: 'new', component: MessageEditorComponent},
-    { path: 'view', component: MessageViewerComponent}//,
+    { path: 'mailbox/:id', component: MailBoxComponent,
+      children:[
+        { path: '', component: MailBoxLettersListComponent },
+        { path: 'edit', component: MessageEditorComponent},
+        { path: 'view/:id', component: MessageViewerComponent}
+      ]},
+    { path: 'addresses', component: AddressBookComponent},//,
     //{ path: '**', component: NotFoundComponent }
 ];
 
@@ -29,6 +33,7 @@ const appRoutes: Routes =[
     MessageViewerComponent,
     MailBoxComponent,
     MailBoxListComponent,
+    MailBoxLettersListComponent,
   ],
   imports: [
     BrowserModule,
