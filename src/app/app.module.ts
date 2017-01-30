@@ -15,11 +15,11 @@ import { MailBoxLettersListComponent } from './mail-box/mail-box-letters-list/ma
 // определение маршрутов
 const appRoutes: Routes =[
     { path: '', component: MailBoxComponent},
-    { path: 'mailbox/:id', component: MailBoxComponent,
+    { path: 'mailbox/:mailBoxId', component: MailBoxComponent,
       children:[
         { path: '', component: MailBoxLettersListComponent },
         { path: 'edit', component: MessageEditorComponent},
-        { path: 'view/:id', component: MessageViewerComponent}
+        { path: 'view/:letterId', component: MessageViewerComponent}
       ]},
     { path: 'addresses', component: AddressBookComponent},//,
     //{ path: '**', component: NotFoundComponent }
