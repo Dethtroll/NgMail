@@ -1,3 +1,35 @@
-<ul>
-  <li *ngFor="let letter of letters">{{letter.subject}}</li>
-</ul>
+<!--<ul>
+  <li *ngFor="let letter of letters"><a [routerLink]="['/mailbox', letter.mailbox, 'view', letter._id ]" routerLinkActive="active">{{letter.subject}}</a></li>
+</ul>-->
+
+
+<div class="inbox col-sm-10">
+  <ul class="list-unstyled">
+    <li class="email-item row unread" *ngFor="let letter of letters">
+      <div class="people col-sm-3">
+        <ul class="mail-icons list-inline">
+          <li>
+            <input type="checkbox" class="mail-select" name="checked" [(ngModel)]="letter.checked">
+          </li>
+        </ul>
+
+        <span class="people-names">
+          {{letter.from}}
+        </span>
+      </div><!-- people -->
+
+      <div class="message col-sm-7">
+        <div class="clipper">
+          <h3>{{letter.subject}}</h3>
+          -
+          <p>{{letter.body}}</p>
+        </div>
+      </div><!-- message -->
+
+      <div class="date col-sm-2">
+        <span class="pull-right">{{letter.time}}</span>
+      </div><!-- date -->
+    </li>
+
+  </ul>
+</div><!-- inbox -->

@@ -5,7 +5,7 @@ import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map'
 import 'rxjs/add/operator/filter'
 
-import { Letter } from './../../domain/letter'
+import { Letter } from './../domain/letter'
 
 @Injectable()
 export class MailBoxLettersListService {

@@ -1,7 +1,7 @@
 {
   "project": {
     "version": "1.0.0-beta.22-1",
-    "name": "gmail"
+    "name": "ngmail"
   },
   "apps": [
     {
@@ -18,7 +18,10 @@
       "prefix": "app",
       "mobile": false,
       "styles": [
-        "styles.css"
+        "styles.css",
+        "styles/bootstrap.css",
+        "styles/bootstrap-theme.css",
+        "styles/main.css"
       ],
       "scripts": [],
       "environments": {

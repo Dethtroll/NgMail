@@ -1,3 +1,10 @@
-<app-mail-box-list></app-mail-box-list>
+<div class="mail row">
 
-<router-outlet></router-outlet>
+    <div class="sidebar col-sm-2">
+        <button class="compose btn btn-danger">Compose</button>
+        <app-mail-box-list></app-mail-box-list>
+    </div><!-- sidebar -->
+
+    <router-outlet></router-outlet>
+
+  </div><!-- mail -->

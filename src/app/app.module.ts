@@ -18,11 +18,11 @@ const appRoutes: Routes =[
     { path: 'mailbox/:mailBoxId', component: MailBoxComponent,
       children:[
         { path: '', component: MailBoxLettersListComponent },
-        { path: 'edit', component: MessageEditorComponent},
+        { path: 'new', component: MessageEditorComponent},
         { path: 'view/:letterId', component: MessageViewerComponent}
       ]},
-    { path: 'addresses', component: AddressBookComponent},//,
-    //{ path: '**', component: NotFoundComponent }
+    { path: 'addresses', component: AddressBookComponent},
+    { path: '**', component: MailBoxComponent }
 ];
 
 @NgModule({

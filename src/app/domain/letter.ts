@@ -4,4 +4,8 @@ export class Letter {
     subject: string;
     body: string;
     to: string;
+
+    from: string;
+    time: string;
+    checked: boolean;
 }
