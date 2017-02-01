@@ -17,12 +17,7 @@
       "tsconfig": "tsconfig.json",
       "prefix": "app",
       "mobile": false,
-      "styles": [
-        "styles.css",
-        "styles/bootstrap.css",
-        "styles/bootstrap-theme.css",
-        "styles/main.css"
-      ],
+      "styles": [],
       "scripts": [],
       "environments": {
         "source": "environments/environment.ts",

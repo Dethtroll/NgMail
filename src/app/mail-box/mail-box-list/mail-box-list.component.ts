@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { MailBoxListService } from './mail-box-list.service';
 
 import { MailBox } from './../../domain/mailBox'
@@ -10,7 +10,8 @@ import 'rxjs/add/operator/map'
   selector: 'app-mail-box-list',
   templateUrl: './mail-box-list.component.html',
   styleUrls: ['./mail-box-list.component.css'],
-  providers: [MailBoxListService]
+  providers: [MailBoxListService],
+  encapsulation: ViewEncapsulation.None
 })
 export class MailBoxListComponent implements OnInit {
   mailBoxes: MailBox[];

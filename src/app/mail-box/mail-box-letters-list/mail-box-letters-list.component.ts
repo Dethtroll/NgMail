@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
 import { MailBoxLettersListService } from './../mail-box-letters-list.service'
@@ -8,7 +8,8 @@ import { Letter } from './../../domain/letter'
 @Component({
   selector: 'app-mail-box-letters-list',
   templateUrl: './mail-box-letters-list.component.html',
-  styleUrls: ['./mail-box-letters-list.component.css']
+  styleUrls: ['./mail-box-letters-list.component.css'],
+  encapsulation: ViewEncapsulation.None
 })
 export class MailBoxLettersListComponent implements OnInit {
 
