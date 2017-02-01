@@ -22,6 +22,15 @@ export class MailBoxListService {
   //       return Observable.throw(error);})
   //   .subscribe(x => console.log(x));
 
+  // this.http.post("http://test-api.javascript.ru/v1/dethtroll", {mailboxes:[{"title": "Inbox"}]})
+  //   .catch((error: any, t:Observable<any>) => {
+  //       console.error(error);
+  //       return Observable.throw(error);})
+  //   .subscribe(x => console.log(x));
+
+    // this.http.delete("http://test-api.javascript.ru/v1/dethtroll/mailboxes")
+    //   .subscribe(x => console.log(x));
+
     return this.http.get('http://test-api.javascript.ru/v1/dethtroll/mailboxes')
       .map(response => response.json())
       .mergeMap((mailBoxes: MailBox[]) => Observable.from(mailBoxes))
