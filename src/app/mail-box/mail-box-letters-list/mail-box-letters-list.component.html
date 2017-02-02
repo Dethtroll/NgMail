@@ -1,11 +1,6 @@
-<!--<ul>
-  <li *ngFor="let letter of letters"><a [routerLink]="['/mailbox', letter.mailbox, 'view', letter._id ]" routerLinkActive="active">{{letter.subject}}</a></li>
-</ul>-->
-
-
 <div class="inbox col-sm-10">
   <ul class="list-unstyled">
-    <li class="email-item row unread" *ngFor="let letter of letters">
+    <li class="email-item row unread" *ngFor="let letter of letters" (click)="viewMessageRequested(letter)">
       <div class="people col-sm-3">
         <ul class="mail-icons list-inline">
           <li>

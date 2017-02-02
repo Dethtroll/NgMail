@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 import { MailBoxLettersListService } from './../mail-box-letters-list.service'
 
@@ -15,17 +15,20 @@ export class MailBoxLettersListComponent implements OnInit {
 
   letters: Letter[];
 
-  constructor(private route: ActivatedRoute, private letterService: MailBoxLettersListService) { }
+  constructor(private route: ActivatedRoute, private router:Router, private letterService: MailBoxLettersListService) { }
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.route.params.subscribe((params:any)=> {
       this.letters = [];
       if(params.mailBoxId != undefined)
       {
-        this.letterService.get(params.mailBoxId)
+        this.letterService.getAll(params.mailBoxId)
           .subscribe(item => { this.letters.push(item); });
       }
     });
   }
 
+  viewMessageRequested(letter: Letter): void {
+    this.router.navigate(["/mailbox", letter.mailbox, "view", letter._id]);
+  }
 }

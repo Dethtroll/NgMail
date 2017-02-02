@@ -1,0 +1,23 @@
+<div class="inbox col-sm-10 jumbotron">
+  
+  <div class="row">
+      <h4>{{messageSubject}}</h4>
+  </div>
+  <div class="row">
+    <span class="control-label">from: {{messageSender}}</span>
+  </div>
+  <div class="row">
+    {{messageBody}}
+  </div>
+
+  <br />
+  <hr />
+  <div class="row">
+    <textarea class="reply-form" rows="10" placeholder="reply"></textarea>
+  </div>
+  <div class="row">
+    <button class="btn btn-primary">
+      <span>Send</span>
+    </button>
+  </div>
+</div><!-- inbox -->

@@ -40,19 +40,17 @@
         <select (change)="modeChanged($event.target.value)">
           <option *ngFor="let mode of modes" [value]="mode.id">{{mode.title}}</option>
         </select>
-      </div> <!-- DropDown -->
-      <!--<ul class="control-list list-inline">
-        <li>
-          <a routerLink="" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">Gmail</a>
-        </li>
-        <li>
-          <a routerLink="addresses" routerLinkActive="active">Address book</a>
-        </li>
-      </ul>-->
+      </div>
+
     </div><!-- menu -->
 
     <div class="controls col-sm-10">
       <ul class="control-list list-inline">
+        <li>
+          <button class="btn btn-control">
+            <span class="glyphicon glyphicon-menu-left"></span>
+          </button>
+        </li>
         <li>
           <button class="btn btn-control">
             <input type="checkbox" class="mail-select">

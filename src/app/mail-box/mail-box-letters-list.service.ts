@@ -12,8 +12,7 @@ export class MailBoxLettersListService {
 
   constructor(private http: Http) { }
 
-  get(mailBoxName: string):Observable<Letter>
-  {
+  getAll(mailBoxName: string): Observable<Letter> {
     return this.http.get('http://test-api.javascript.ru/v1/dethtroll/letters')
       .map(response => response.json())
       .mergeMap((letters: Letter[]) => Observable.from(letters))
@@ -24,4 +23,13 @@ export class MailBoxLettersListService {
       });
   }
 
+  get(letterId: string): Observable<Letter> {
+    return this.http.get('http://test-api.javascript.ru/v1/dethtroll/letters/'+letterId)
+      .map(response => response.json())
+      .mergeMap((letter: Letter) => Observable.from([letter]))
+      .catch((error: any, t:Observable<any>) => {
+        console.error(error);
+        return Observable.throw(error);
+      });
+  }
 }
