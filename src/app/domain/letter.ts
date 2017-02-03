@@ -1,11 +1,13 @@
 export class Letter {
     _id: string;
-    mailbox: string;
-    subject: string;
-    body: string;
-    to: string;
 
     from: string;
     time: string;
     checked: boolean;
+
+    constructor( 
+        public mailbox: string,
+        public subject: string,
+        public body: string,
+        public to: string) {}
 }

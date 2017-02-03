@@ -11,6 +11,7 @@ import { MessageViewerComponent } from './mail-box/message-viewer/message-viewer
 import { MailBoxComponent } from './mail-box/mail-box.component';
 import { MailBoxListComponent } from './mail-box/mail-box-list/mail-box-list.component';
 import { MailBoxLettersListComponent } from './mail-box/mail-box-letters-list/mail-box-letters-list.component';
+import { ReplyFormComponent } from './mail-box/message-viewer/reply-form/reply-form.component';
 
 // определение маршрутов
 const appRoutes: Routes =[
@@ -34,6 +35,7 @@ const appRoutes: Routes =[
     MailBoxComponent,
     MailBoxListComponent,
     MailBoxLettersListComponent,
+    ReplyFormComponent,
   ],
   imports: [
     BrowserModule,

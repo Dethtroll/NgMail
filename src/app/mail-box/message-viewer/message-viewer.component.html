@@ -1,23 +1,16 @@
 <div class="inbox col-sm-10 jumbotron">
   
   <div class="row">
-      <h4>{{messageSubject}}</h4>
+      <h4>{{letter?.subject}}</h4>
   </div>
   <div class="row">
-    <span class="control-label">from: {{messageSender}}</span>
+    <span class="control-label">from: {{letter?.sender}}</span>
   </div>
   <div class="row">
-    {{messageBody}}
+    {{letter?.body}}
   </div>
 
   <br />
   <hr />
-  <div class="row">
-    <textarea class="reply-form" rows="10" placeholder="reply"></textarea>
-  </div>
-  <div class="row">
-    <button class="btn btn-primary">
-      <span>Send</span>
-    </button>
-  </div>
+  <app-reply-form [sourceLetter]="letter"></app-reply-form>
 </div><!-- inbox -->

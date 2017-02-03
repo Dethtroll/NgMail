@@ -32,4 +32,14 @@ export class MailBoxLettersListService {
         return Observable.throw(error);
       });
   }
+
+  post(letter: any): void {
+    console.log(letter);
+    this.http.post('http://test-api.javascript.ru/v1/dethtroll/letters/', letter)
+      .catch((error: any, t:Observable<any>) => {
+          console.error(error);
+          return Observable.throw(error);})
+      .subscribe(x => console.log(x))
+      ;
+  }
 }

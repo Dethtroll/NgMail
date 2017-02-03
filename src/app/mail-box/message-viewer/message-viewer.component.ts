@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
+import { Letter } from './../../domain/letter';
 import { MailBoxLettersListService } from './../mail-box-letters-list.service'
 
 @Component({
@@ -11,9 +12,7 @@ import { MailBoxLettersListService } from './../mail-box-letters-list.service'
 })
 export class MessageViewerComponent implements OnInit {
   
-  messageSubject: string;
-  messageSender: string;
-  messageBody: string;
+  letter: Letter;
 
   constructor(private route: ActivatedRoute, private letterService: MailBoxLettersListService) { }
 
@@ -23,9 +22,8 @@ export class MessageViewerComponent implements OnInit {
       {
          this.letterService.get(params.letterId)
           .subscribe(letter => { 
-            this.messageSubject = letter.subject;
-            this.messageSender = letter.to;
-            this.messageBody = letter.body;
+            this.letter = letter;
+            this.letter.from = this.letter.to;
            });
       }
     });
