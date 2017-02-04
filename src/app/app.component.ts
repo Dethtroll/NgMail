@@ -3,11 +3,14 @@ import { Router } from '@angular/router'
 
 import { AppMode } from './domain/appMode';
 
+import { ContactsBookService } from './contacts-book.service'
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
-  encapsulation: ViewEncapsulation.None
+  encapsulation: ViewEncapsulation.None,
+  providers: [ContactsBookService]
 })
 export class AppComponent implements OnInit {
   title = 'app works!';

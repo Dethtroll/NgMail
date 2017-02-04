@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule  } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { Routes, RouterModule } from '@angular/router';
 
@@ -12,6 +12,8 @@ import { MailBoxComponent } from './mail-box/mail-box.component';
 import { MailBoxListComponent } from './mail-box/mail-box-list/mail-box-list.component';
 import { MailBoxLettersListComponent } from './mail-box/mail-box-letters-list/mail-box-letters-list.component';
 import { ReplyFormComponent } from './mail-box/message-viewer/reply-form/reply-form.component';
+import { ContactListComponent } from './contacts-book/contact-list/contact-list.component';
+import { AddContactComponent } from './contacts-book/add-contact/add-contact.component';
 
 // определение маршрутов
 const appRoutes: Routes =[
@@ -36,10 +38,13 @@ const appRoutes: Routes =[
     MailBoxLettersListComponent,
     ReplyFormComponent,
     ContactsBookComponent,
+    ContactListComponent,
+    AddContactComponent,
   ],
   imports: [
     BrowserModule,
     FormsModule,
+    ReactiveFormsModule,
     HttpModule,
     RouterModule.forRoot(appRoutes, {useHash: true})
   ],

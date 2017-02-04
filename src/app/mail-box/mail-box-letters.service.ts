@@ -46,7 +46,6 @@ export class MailBoxLettersService {
       .catch((error: any, t:Observable<any>) => {
           console.error(error);
           return Observable.throw(error);})
-      .subscribe(x => console.log(x))
-      ;
+      .subscribe(x => console.log(x));
   }
 }

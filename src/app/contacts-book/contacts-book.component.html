@@ -1,3 +1,11 @@
-<p>
-  contacts-book works!
-</p>
+<div class="mail row">
+
+    <div class="sidebar col-sm-2 contact-goups">
+      <a class="compose btn btn-danger" [routerLink]="['/mailbox', mailboxId, 'new']">Compose</a>
+    </div>
+
+    <app-add-contact (contactAdded)="contacatList.addContact($event)"></app-add-contact>
+
+    <app-contact-list #contacatList></app-contact-list>
+
+</div>

@@ -1,0 +1,35 @@
+<div class="inbox col-sm-9 panel panel-default panel-add-contact">
+
+  <form class="panel-body" novalidate [formGroup]="addContactForm" (ngSubmit)="onSubmit(addContactForm);">
+    <div class="form-group" formGroupName="main">
+        <div class="col-sm-4">
+          <div class="input-group">
+            <span class="input-group-addon" id="basic-addon1">Name</span>
+            <input type="text" class="form-control" formControlName="fullname" placeholder="Fullname">
+          </div>
+          <div class="label label-danger" *ngIf="addContactForm.get('main').get('fullname').touched && addContactForm.get('main').get('fullname').hasError('required')">
+            Name is required
+          </div>
+          <div class="label label-danger" *ngIf="addContactForm.get('main').get('fullname').touched && addContactForm.get('main').get('fullname').hasError('minlength')">
+            Minimum of 2 characters
+          </div>
+        </div>
+        <div class="col-sm-7">
+          <div class="input-group">
+            <span class="input-group-addon" id="basic-addon1">@</span>
+            <input type="email" class="form-control" formControlName="email" placeholder="Email">
+          </div>
+          <div class="label label-danger" *ngIf="addContactForm.get('main').get('email').touched && addContactForm.get('main').get('email').hasError('required')">
+            Email is required
+          </div>
+          <div class="label label-danger" *ngIf="addContactForm.get('main').get('email').touched && addContactForm.get('main').get('email').hasError('pattern')">
+            Email is valid
+          </div>
+        </div>
+        <div class="col-sm-1">
+          <button class="btn btn-defaul" type="submit" [disabled]="addContactForm.invalid">Add</button>
+        </div>
+    </div>
+  </form>
+
+</div>
