@@ -20,7 +20,7 @@ export class ReplyFormComponent implements OnInit {
   }
 
   sendReplyRequested(replyBody: string) {
-    this.letterService.post({mailbox: '58920c629de15a250410f6b9', subject: this.sourceLetter.subject, body: replyBody, to:this.sourceLetter.from});
+    this.letterService.send(new Letter(this.sourceLetter.subject, replyBody, this.sourceLetter.from));
   }
 
 }

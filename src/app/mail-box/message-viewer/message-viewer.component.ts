@@ -21,9 +21,8 @@ export class MessageViewerComponent implements OnInit {
       if(params.letterId != undefined)
       {
          this.letterService.get(params.letterId)
-          .subscribe(letter => { 
+          .subscribe((letter:Letter) => { 
             this.letter = letter;
-            this.letter.from = this.letter.to;
            });
       }
     });

@@ -15,8 +15,12 @@ export class MailBoxLettersListService {
   getAll(mailBoxName: string): Observable<Letter> {
     return this.http.get('http://test-api.javascript.ru/v1/dethtroll/letters')
       .map(response => response.json())
-      .mergeMap((letters: Letter[]) => Observable.from(letters))
-      .filter(object => object.mailbox == mailBoxName)
+      .mergeMap((letters: Letter[]) => Observable.from(
+        letters.map((l: Letter) => { 
+          let letter = new Letter(l.subject, l.body, l.to, l.mailbox, l._id);
+          return letter;
+        })))
+      .filter(letter => letter.mailbox == mailBoxName)
       .catch((error: any, t:Observable<any>) => {
         console.error(error);
         return Observable.throw(error);
@@ -26,15 +30,18 @@ export class MailBoxLettersListService {
   get(letterId: string): Observable<Letter> {
     return this.http.get('http://test-api.javascript.ru/v1/dethtroll/letters/'+letterId)
       .map(response => response.json())
-      .mergeMap((letter: Letter) => Observable.from([letter]))
+      .mergeMap((l: Letter) => {
+        let letter = new Letter(l.subject, l.body, l.to, l.mailbox, l._id);
+        return Observable.from([letter]);
+      })
       .catch((error: any, t:Observable<any>) => {
         console.error(error);
         return Observable.throw(error);
       });
   }
 
-  post(letter: any): void {
-    console.log(letter);
+  send(letter: Letter): void {
+    letter.mailbox = '58920c629de15a250410f6b9';
     this.http.post('http://test-api.javascript.ru/v1/dethtroll/letters/', letter)
       .catch((error: any, t:Observable<any>) => {
           console.error(error);

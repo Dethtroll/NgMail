@@ -1,3 +1,26 @@
-<p>
-  message-editor works!
-</p>
+<form #f="ngForm" (ngSubmit)="onSubmit(f)">
+
+  <div class="inbox col-sm-9 jumbotron">
+  
+    <div ngModelGroup="letter" #g="ngModelGroup">
+      <div class="row">
+        <span class="control-label col-sm-1">To:</span>
+        <input class="col-sm-11" type="email" name="to" placeholder="to" [ngModel]="letter.to" required>
+      </div>
+      <div class="row">
+        <span class="control-label col-sm-1">Subject:</span>
+        <input class="col-sm-11" type="text" name="subject" placeholder="subject" [ngModel]="letter.subject" required>
+      </div>
+      <div class="row">
+        <br/>
+        <textarea name="body" rows="10" placeholder="message" [ngModel]="letter.body"></textarea>
+      </div>
+    </div>
+    
+    <div class="row">
+      <button class="btn btn-primary">
+        <span>Send</span>
+      </button>
+    </div>
+  </div><!-- inbox -->
+</form>

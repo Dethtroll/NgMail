@@ -1,4 +1,9 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation, ViewChild } from '@angular/core';
+import { NgModel, NgForm, NgModelGroup } from '@angular/forms';
+
+import { Letter } from './../../domain/letter'
+
+import { MailBoxLettersListService } from './../mail-box-letters-list.service';
 
 @Component({
   selector: 'app-message-editor',
@@ -8,9 +13,20 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 })
 export class MessageEditorComponent implements OnInit {
 
-  constructor() { }
+  @ViewChild('f')
+  myform: NgForm;
+
+  letter = {to: '', subject: '', body: ''};
+
+  constructor(private letterService: MailBoxLettersListService) { }
 
   ngOnInit() {
   }
 
+  onSubmit(form: NgForm){
+    if(form.valid) {
+      let letter = form.value.letter;
+      this.letterService.send(new Letter(letter.subject, letter.body, letter.to))
+    }
+  }
 }
