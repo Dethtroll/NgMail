@@ -12,13 +12,15 @@ import { MailBoxLettersListService } from './mail-box-letters-list.service'
 })
 export class MailBoxComponent implements OnInit {
 
+  mailboxId: string;
+
   constructor(private route: ActivatedRoute) { }
 
   ngOnInit() {
     this.route.params.subscribe((params:any)=> {
       if(params.mailBoxId != undefined)
       {
-        
+        this.mailboxId = params.mailBoxId
       }
     });
   }
