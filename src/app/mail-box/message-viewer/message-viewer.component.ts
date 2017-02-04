@@ -2,7 +2,7 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
 import { Letter } from './../../domain/letter';
-import { MailBoxLettersListService } from './../mail-box-letters-list.service'
+import { MailBoxLettersService } from './../mail-box-letters.service'
 
 @Component({
   selector: 'app-message-viewer',
@@ -14,7 +14,7 @@ export class MessageViewerComponent implements OnInit {
   
   letter: Letter;
 
-  constructor(private route: ActivatedRoute, private letterService: MailBoxLettersListService) { }
+  constructor(private route: ActivatedRoute, private letterService: MailBoxLettersService) { }
 
   ngOnInit() {
     this.route.params.subscribe((params:any)=> {

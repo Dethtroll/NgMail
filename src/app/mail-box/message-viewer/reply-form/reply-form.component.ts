@@ -2,7 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 
 import { Letter } from './../../../domain/letter'
 
-import { MailBoxLettersListService } from './../../mail-box-letters-list.service';
+import { MailBoxLettersService } from './../../mail-box-letters.service';
 
 @Component({
   selector: 'app-reply-form',
@@ -14,7 +14,7 @@ export class ReplyFormComponent implements OnInit {
   @Input()
   sourceLetter: Letter;
 
-  constructor(private letterService: MailBoxLettersListService) { }
+  constructor(private letterService: MailBoxLettersService) { }
 
   ngOnInit() {
   }

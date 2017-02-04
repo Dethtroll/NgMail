@@ -8,7 +8,7 @@ import 'rxjs/add/operator/filter'
 import { Letter } from './../domain/letter'
 
 @Injectable()
-export class MailBoxLettersListService {
+export class MailBoxLettersService {
 
   constructor(private http: Http) { }
 

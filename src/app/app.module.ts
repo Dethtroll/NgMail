@@ -5,7 +5,7 @@ import { HttpModule } from '@angular/http';
 import { Routes, RouterModule } from '@angular/router';
 
 import { AppComponent } from './app.component';
-import { AddressBookComponent } from './address-book/address-book.component';
+import { ContactsBookComponent } from './contacts-book/contacts-book.component';
 import { MessageEditorComponent } from './mail-box/message-editor/message-editor.component';
 import { MessageViewerComponent } from './mail-box/message-viewer/message-viewer.component';
 import { MailBoxComponent } from './mail-box/mail-box.component';
@@ -22,20 +22,20 @@ const appRoutes: Routes =[
         { path: 'new', component: MessageEditorComponent},
         { path: 'view/:letterId', component: MessageViewerComponent}
       ]},
-    { path: 'addresses', component: AddressBookComponent},
+    { path: 'contacts', component: ContactsBookComponent},
     { path: '**', component: MailBoxComponent }
 ];
 
 @NgModule({
   declarations: [
     AppComponent,
-    AddressBookComponent,
     MessageEditorComponent,
     MessageViewerComponent,
     MailBoxComponent,
     MailBoxListComponent,
     MailBoxLettersListComponent,
     ReplyFormComponent,
+    ContactsBookComponent,
   ],
   imports: [
     BrowserModule,

@@ -28,7 +28,7 @@ export class AppComponent implements OnInit {
 
   modeChanged(mode:AppMode) {
     if(mode == AppMode.Contacts) {
-      this.router.navigate(['addresses']);
+      this.router.navigate(['contacts']);
     }
     //if(mode == AppMode.Mail) {
     else {
