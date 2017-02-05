@@ -3,5 +3,6 @@ export class Contact{
     fullName: string;
     email: string;
 
-    checked: boolean;
+    isEdditing: boolean;
+    isChecked: boolean;
 }

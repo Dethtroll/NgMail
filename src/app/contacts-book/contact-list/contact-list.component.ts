@@ -26,6 +26,11 @@ export class ContactListComponent implements OnInit {
     this.contacts.push(contact);
   }
 
+  updateRequested(contact: Contact) {
+    // this.contacsService.update(contact)
+    //   .subscribe(item => )
+  }
+
   //   viewMessageRequested(letter: Letter): void {
   //   this.router.navigate(["/mailbox", letter.mailbox, "view", letter._id]);
   // }

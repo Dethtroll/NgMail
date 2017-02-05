@@ -43,7 +43,13 @@ export class ContactsBookService {
   }
 
   update(contact: Contact) {
-
+    return this.http.put('http://test-api.javascript.ru/v1/dethtroll/users/', contact)
+      .map(response => response.json())
+      .mergeMap((contact: Contact) => Observable.from([contact]))
+      .catch((error: any, t:Observable<any>) => {
+        console.error(error);
+        return Observable.throw(error);
+      });
   }
 
   detete(contact: Contact) {
