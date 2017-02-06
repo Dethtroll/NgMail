@@ -7,7 +7,7 @@
         <div class="people col-sm-4">
           <ul class="mail-icons list-inline">
             <li>
-              <input type="checkbox" class="mail-select" name="checked" [(ngModel)]="contact.isChecked" *ngIf="!contact.isEdditing">
+              <input type="checkbox" class="mail-select" name="checked" [(ngModel)]="contact.isChecked" *ngIf="!contact.isEdditing" (change)="selectChanged($event.target.checked)">
             </li>
           </ul>
 
