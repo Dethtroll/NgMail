@@ -37,7 +37,10 @@ export class AppComponent implements OnInit {
   }
 
   modeChanged(mode:AppMode) {
+    this.controlPanel.appModeChange(mode);
+    
     if(mode == AppMode.Contacts) {
+      this.controlPanel.appModeChange(mode);
       this.router.navigate(['contacts']);
     }
     //if(mode == AppMode.Mail) {
@@ -53,5 +56,9 @@ export class AppComponent implements OnInit {
     else {
       this.controlPanel.selectNoneRaise();
     }
+  }
+
+  searchValueEntered(value: string) {
+    this.controlPanel.searchValueChange(value);
   }
 }
