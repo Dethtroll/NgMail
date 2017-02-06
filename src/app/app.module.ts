@@ -15,6 +15,7 @@ import { ReplyFormComponent } from './mail-box/message-viewer/reply-form/reply-f
 import { ContactListComponent } from './contacts-book/contact-list/contact-list.component';
 import { AddContactComponent } from './contacts-book/add-contact/add-contact.component';
 import { ContactFilterPipe } from './contacts-book/contact-list/contact-filter.pipe';
+import { MailBoxLettersFilterPipe } from './mail-box/mail-box-letters-list/mail-box-letters-filter.pipe';
 
 // определение маршрутов
 const appRoutes: Routes =[
@@ -42,6 +43,7 @@ const appRoutes: Routes =[
     ContactListComponent,
     AddContactComponent,
     ContactFilterPipe,
+    MailBoxLettersFilterPipe,
   ],
   imports: [
     BrowserModule,

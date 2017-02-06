@@ -16,6 +16,7 @@ import { ControlPanelService } from './../../control-panel.service';
 })
 export class ContactListComponent implements OnInit, OnDestroy {
 
+  filterValue: string = null;
   contacts: ContactDto[];
   _selectedCount: number;
 
@@ -30,6 +31,7 @@ export class ContactListComponent implements OnInit, OnDestroy {
   _deleteSelectedObservable: Subscription;
   _selectedAllObservable: Subscription;
   _selectedNoneObservable: Subscription;
+  _searchObservable: Subscription;
 
   constructor(private contacsService: ContactsBookService, private controlPanel: ControlPanelService) { }
 
@@ -43,12 +45,14 @@ export class ContactListComponent implements OnInit, OnDestroy {
     this._deleteSelectedObservable = this.controlPanel.deleteRequested.subscribe(() => this.deleteSelectedRequested());
     this._selectedAllObservable = this.controlPanel.selectedAll.subscribe(() => this.selectAllRequested());
     this._selectedNoneObservable = this.controlPanel.selectedNone.subscribe(() => this.selectNoneRequested());
+    this._searchObservable = this.controlPanel.searchValueChanged.subscribe((value: string) => this.filterValue = value);
   }
 
   ngOnDestroy(){
     this._deleteSelectedObservable.unsubscribe();
     this._selectedAllObservable.unsubscribe();
     this._selectedNoneObservable.unsubscribe();
+    this._searchObservable.unsubscribe();
   }
 
   private addContact(contact: ContactDto){

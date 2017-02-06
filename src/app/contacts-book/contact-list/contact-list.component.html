@@ -1,6 +1,6 @@
 <div class="inbox col-sm-9 panel panel-default">
   <ul class="list-unstyled">
-    <li class="email-item row unread" *ngFor="let contact of contacts">
+    <li class="email-item row unread" *ngFor="let contact of contacts|contactFilter:filterValue">
 
       <form #f="ngForm" (ngSubmit)="updateRequested(f)">
         <input type="hidden" name="_id" [ngModel]="contact._id">

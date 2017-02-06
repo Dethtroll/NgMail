@@ -16,6 +16,7 @@ import { ControlPanelService } from './../../control-panel.service';
 })
 export class MailBoxLettersListComponent implements OnInit, OnDestroy {
 
+  filterValue: string = null;
   letters: Letter[];
   _selectedCount: number;
 
@@ -30,6 +31,7 @@ export class MailBoxLettersListComponent implements OnInit, OnDestroy {
   _deleteSelectedObservable: Subscription;
   _selectedAllObservable: Subscription;
   _selectedNoneObservable: Subscription;
+  _searchObservable: Subscription;
 
   constructor(
     private route: ActivatedRoute, 
@@ -51,12 +53,14 @@ export class MailBoxLettersListComponent implements OnInit, OnDestroy {
     this._deleteSelectedObservable = this.controlPanel.deleteRequested.subscribe(() => this.deleteSelectedRequested());
     this._selectedAllObservable = this.controlPanel.selectedAll.subscribe(() => this.selectAllRequested());
     this._selectedNoneObservable = this.controlPanel.selectedNone.subscribe(() => this.selectNoneRequested());
+    this._searchObservable = this.controlPanel.searchValueChanged.subscribe((value: string) => this.filterValue = value);
   }
 
   ngOnDestroy(){
     this._deleteSelectedObservable.unsubscribe();
     this._selectedAllObservable.unsubscribe();
     this._selectedNoneObservable.unsubscribe();
+    this._searchObservable.unsubscribe();
   }
 
   viewMessageRequested(letter: Letter): void {

@@ -1,6 +1,6 @@
 <div class="inbox col-sm-10">
   <ul class="list-unstyled">
-    <li class="email-item row unread" *ngFor="let letter of letters">
+    <li class="email-item row unread" *ngFor="let letter of letters|mailBoxLettersFilter:filterValue">
       <div class="people col-sm-3">
         <ul class="mail-icons list-inline">
           <li>
