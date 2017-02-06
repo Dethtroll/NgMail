@@ -2,37 +2,43 @@
   <ul class="list-unstyled">
     <li class="email-item row unread" *ngFor="let contact of contacts">
 
-      <div class="people col-sm-4">
-        <ul class="mail-icons list-inline">
-          <li>
-            <input type="checkbox" class="mail-select" name="checked" [(ngModel)]="contact.isChecked" *ngIf="!contact.isEdditing">
-          </li>
-        </ul>
+      <form #f="ngForm" (ngSubmit)="updateRequested(f)">
+        <input type="hidden" name="_id" [ngModel]="contact._id">
+        <div class="people col-sm-4">
+          <ul class="mail-icons list-inline">
+            <li>
+              <input type="checkbox" class="mail-select" name="checked" [(ngModel)]="contact.isChecked" *ngIf="!contact.isEdditing">
+            </li>
+          </ul>
 
-        <span class="people-names" *ngIf="!contact.isEdditing">
-          {{contact.fullName}}
-        </span>
-        <input type="text" *ngIf="contact.isEdditing" [(ngModel)]="contact.fullName">
-      </div>
+          <span class="people-names" *ngIf="!contact.isEdditing">
+            {{contact.fullName}}
+          </span>
+          <input type="text" name="newFullName" *ngIf="contact.isEdditing" [(ngModel)]="contact.newFullName" required minlength="2">
+        </div>
 
-      <div class="message col-sm-6">
-        <span class="people-names" *ngIf="!contact.isEdditing">
-          {{contact.email}}
-        </span>
-        <input type="text" *ngIf="contact.isEdditing" [(ngModel)]="contact.email">
-      </div>
+        <div class="message col-sm-6">
+          <span class="people-names" *ngIf="!contact.isEdditing">
+            {{contact.email}}
+          </span>
+          <input type="text" name="newEmail" *ngIf="contact.isEdditing" [(ngModel)]="contact.newEmail" required pattern="[a-zA-Z0-9_]+@[a-zA-Z0-9_.]+">
+        </div>
 
-      <div class="date col-sm-2">
-        <button class="btn" *ngIf="contact.isEdditing" (click)="updateRequested(contact); contact.isEdditing = false">
-          <span class="glyphicon glyphicon-ok"></span>
-        </button>
-        <button class="btn" *ngIf="contact.isEdditing" (click)="contact.isEdditing = false">
-          <span class="glyphicon glyphicon-remove"></span>
-        </button>
-        <button class="btn" *ngIf="!contact.isEdditing" (click)="contact.isEdditing = true">
-          <span class="glyphicon glyphicon-pencil"></span>
-        </button>
-      </div>
+        <div class="date col-sm-2">
+          <button type="submit" class="btn btn-xs" *ngIf="contact.isEdditing">
+            <span class="glyphicon glyphicon-ok"></span>
+          </button>
+          <button class="btn btn-xs" *ngIf="contact.isEdditing" (click)="contact.isEdditing = false; contact.cancelEdit();">
+            <span class="glyphicon glyphicon-remove"></span>
+          </button>
+          <button class="btn btn-xs" *ngIf="!contact.isEdditing" (click)="contact.isEdditing = true">
+            <span class="glyphicon glyphicon-pencil"></span>
+          </button>
+          <button class="btn btn-xs" *ngIf="!contact.isEdditing" (click)="deleteRequested(contact)">
+            <span class="glyphicon glyphicon-trash"></span>
+          </button>
+        </div>
+      </form>
 
     </li>
 

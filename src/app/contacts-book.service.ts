@@ -42,8 +42,8 @@ export class ContactsBookService {
       });
   }
 
-  update(contact: Contact) {
-    return this.http.put('http://test-api.javascript.ru/v1/dethtroll/users/', contact)
+  update(contact: Contact): Observable<Contact> {
+    return this.http.patch('http://test-api.javascript.ru/v1/dethtroll/users/'+contact._id, contact)
       .map(response => response.json())
       .mergeMap((contact: Contact) => Observable.from([contact]))
       .catch((error: any, t:Observable<any>) => {
@@ -52,7 +52,14 @@ export class ContactsBookService {
       });
   }
 
-  detete(contact: Contact) {
-
+  detete(contact: Contact): Observable<boolean> {
+    return this.http.delete('http://test-api.javascript.ru/v1/dethtroll/users/'+contact._id)
+      .map((response: any) => {
+        return response._body === "ok";})
+      .mergeMap((responce: boolean) => Observable.from([responce]))
+      .catch((error: any, t:Observable<any>) => {
+        console.error(error);
+        return Observable.throw(error);
+      });
   }
 }

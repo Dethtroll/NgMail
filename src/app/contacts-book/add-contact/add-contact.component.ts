@@ -29,9 +29,7 @@ export class AddContactComponent implements OnInit {
   onSubmit({ value, valid }: { value: any, valid: boolean }) {
     if(!valid) return;
 
-    let contact =new Contact();
-    contact.fullName = value.main.fullname;
-    contact.email = value.main.email;
+    let contact = new Contact(value.main.fullname, value.main.email);
 
     this.contactService.add(contact)
       .subscribe(contact => this.contactAdded.emit(contact))
