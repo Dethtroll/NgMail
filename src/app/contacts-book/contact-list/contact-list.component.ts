@@ -21,6 +21,8 @@ export class ContactListComponent implements OnInit, OnDestroy {
 
 
   _deleteSelectedObservable: Subscription;
+  _selectedAllObservable: Subscription;
+  _selectedNoneObservable: Subscription;
 
   constructor(private contacsService: ContactsBookService, private controlPanel: ControlPanelService) { }
 
@@ -32,12 +34,14 @@ export class ContactListComponent implements OnInit, OnDestroy {
       .subscribe(item => { let dto = new ContactDto(item.fullName, item.email, item._id); this.addContact(dto); });
 
     this._deleteSelectedObservable = this.controlPanel.deleteRequested.subscribe(() => this.deleteSelectedRequested());
-    this.controlPanel.selectedAll.subscribe(() => this.selectAllRequested());
-    this.controlPanel.selectedNone.subscribe(() => this.selectNoneRequested());
+    this._selectedAllObservable = this.controlPanel.selectedAll.subscribe(() => this.selectAllRequested());
+    this._selectedNoneObservable = this.controlPanel.selectedNone.subscribe(() => this.selectNoneRequested());
   }
 
   ngOnDestroy(){
     this._deleteSelectedObservable.unsubscribe();
+    this._selectedAllObservable.unsubscribe();
+    this._selectedNoneObservable.unsubscribe();
   }
 
   private addContact(contact: ContactDto){
@@ -65,6 +69,10 @@ export class ContactListComponent implements OnInit, OnDestroy {
           this.contacts.splice(index, 1);
         }
       });
+    if(contact.isChecked) {
+      this.selectedCount--;
+      this.controlPanel.selectedCountChange(this.selectedCount);
+    }
   }
 
   selectChanged(event: boolean) {
@@ -78,9 +86,15 @@ export class ContactListComponent implements OnInit, OnDestroy {
       .subscribe((responce: string) => {
         let index = this.contacts.findIndex((currentDto: ContactDto) => currentDto._id == responce);
         if(index >=0 ) {
+          if(this.contacts[index].isChecked) {
+            this.selectedCount--;
+            this.controlPanel.selectedCountChange(this.selectedCount);
+          }
+
           this.contacts.splice(index, 1);
         }
       });
+
   }
 
   selectAllRequested(){

@@ -53,19 +53,6 @@ export class ContactsBookService {
       });
   }
 
-  // detete(contact: Contact): Observable<boolean> {
-  //   return this.http.delete('http://test-api.javascript.ru/v1/dethtroll/users/'+contact._id)
-  //     .map((response: any) => {
-  //       debugger;
-  //       return response._body === "ok";
-  //     })
-  //     .mergeMap((responce: boolean) => Observable.from([responce]))
-  //     .catch((error: any, t:Observable<any>) => {
-  //       console.error(error);
-  //       return Observable.throw(error);
-  //     });
-  // }
-
   deleteMany(contacts: Contact[]): Observable<string> {
     return Observable.from(contacts)
       .map(contact => this.http.delete('http://test-api.javascript.ru/v1/dethtroll/users/'+contact._id))
