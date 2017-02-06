@@ -17,8 +17,15 @@ import { ControlPanelService } from './../../control-panel.service';
 export class ContactListComponent implements OnInit, OnDestroy {
 
   contacts: ContactDto[];
-  selectedCount: number;
+  _selectedCount: number;
 
+  get selectedCount(): number {
+    return this._selectedCount;
+  }
+  set selectedCount(value: number) {
+    this._selectedCount = value;
+    this.controlPanel.selectedCountChange(this._selectedCount);
+  }
 
   _deleteSelectedObservable: Subscription;
   _selectedAllObservable: Subscription;
@@ -61,34 +68,26 @@ export class ContactListComponent implements OnInit, OnDestroy {
       })
   }
 
-  deleteRequested(contact: ContactDto) {
-    this.contacsService.deleteMany([contact])
-      .subscribe((responce: string) => {
-        let index = this.contacts.findIndex((currentDto: ContactDto) => currentDto._id == responce);
-        if(index >=0 ) {
-          this.contacts.splice(index, 1);
-        }
-      });
-    if(contact.isChecked) {
-      this.selectedCount--;
-      this.controlPanel.selectedCountChange(this.selectedCount);
-    }
-  }
-
   selectChanged(event: boolean) {
     this.selectedCount = this.selectedCount + (event ? 1 : -1);
-    this.controlPanel.selectedCountChange(this.selectedCount);
+  }
+
+  deleteRequested(contact: ContactDto) {
+    this.deleteContacts([contact]);
   }
 
   deleteSelectedRequested() {
     let needDelete = this.contacts.filter(contact => contact.isChecked);
-    this.contacsService.deleteMany(needDelete)
+    this.deleteContacts(needDelete);
+  }
+
+  deleteContacts(needDelete: Contact[]) {
+    this.contacsService.delete(needDelete)
       .subscribe((responce: string) => {
         let index = this.contacts.findIndex((currentDto: ContactDto) => currentDto._id == responce);
         if(index >=0 ) {
           if(this.contacts[index].isChecked) {
             this.selectedCount--;
-            this.controlPanel.selectedCountChange(this.selectedCount);
           }
 
           this.contacts.splice(index, 1);
@@ -98,10 +97,12 @@ export class ContactListComponent implements OnInit, OnDestroy {
 
   selectAllRequested(){
     this.contacts.forEach(value => value.isChecked = true);
+    this.selectedCount = this.contacts.length;
   }
 
   selectNoneRequested(){
     this.contacts.forEach(value => value.isChecked = false);
+    this.selectedCount = 0;
   }
 
   //   viewMessageRequested(letter: Letter): void {

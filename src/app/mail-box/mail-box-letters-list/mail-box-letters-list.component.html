@@ -4,7 +4,7 @@
       <div class="people col-sm-3">
         <ul class="mail-icons list-inline">
           <li>
-            <input type="checkbox" class="mail-select" name="checked" [(ngModel)]="letter.checked">
+            <input type="checkbox" class="mail-select" [(ngModel)]="letter.isChecked" (change)="selectChanged($event.target.checked)">
           </li>
         </ul>
 
@@ -22,7 +22,9 @@
       </div><!-- message -->
 
       <div class="date col-sm-2">
-        <span class="pull-right">{{letter.time}}</span>
+        <button class="btn btn-xs" (click)="deleteRequested(letter)">
+          <span class="glyphicon glyphicon-trash"></span>
+        </button>
       </div><!-- date -->
     </li>
 

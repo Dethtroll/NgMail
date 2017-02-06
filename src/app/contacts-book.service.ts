@@ -64,13 +64,12 @@ export class ContactsBookService {
       });
   }
 
-  deleteMany(contacts: Contact[]): Observable<string> {
+  delete(contacts: Contact[]): Observable<string> {
     return Observable.from(contacts)
       .map(contact => this.http.delete('http://test-api.javascript.ru/v1/dethtroll/users/'+contact._id))
       .mergeMap(response => response)
       .filter(response => response.ok)
       .map(response => { 
-        debugger; 
         return response.url.slice(response.url.lastIndexOf('/')+1)
       })
       .catch((error: any, t:Observable<any>) => {

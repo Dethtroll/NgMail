@@ -53,4 +53,19 @@ export class MailBoxLettersService {
         undefined,
         () => this.contactService.addIfNotExist(letter.to));
   }
+
+  delete(letters: Letter[]): Observable<string> {
+    return Observable.from(letters)
+      .map(letter => this.http.delete('http://test-api.javascript.ru/v1/dethtroll/letters/'+letter._id))
+      .mergeMap(response => response)
+      .filter(response => response.ok)
+      .map(response => { 
+        return response.url.slice(response.url.lastIndexOf('/')+1)
+      })
+      .catch((error: any, t:Observable<any>) => {
+        console.error(error);
+        return Observable.throw(error);
+      });
+    
+  }
 }

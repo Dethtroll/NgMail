@@ -4,7 +4,8 @@ export class Letter {
 
     get from(): string { return this.to; }
     time: string;
-    checked: boolean;
+    isEdditing: boolean;
+    isChecked: boolean;
 
     constructor(
         public subject: string,
