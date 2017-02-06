@@ -17,7 +17,7 @@ export class AddContactComponent implements OnInit {
   constructor(private contactService: ContactsBookService, private formBuilder: FormBuilder) { }
 
   ngOnInit() {
-    let emailRegxp = '[a-zA-Z0-9_]+@[a-zA-Z0-9_.]+';
+    let emailRegxp = '[a-zA-Z0-9_.]+@[a-zA-Z0-9_.]+\\.[a-zA-Z]+';
     this.addContactForm = this.formBuilder.group({
       main: this.formBuilder.group({
         fullname: ['', [Validators.required, Validators.minLength(2)]],

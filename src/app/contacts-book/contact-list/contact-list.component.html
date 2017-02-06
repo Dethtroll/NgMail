@@ -21,7 +21,7 @@
           <span class="people-names" *ngIf="!contact.isEdditing">
             {{contact.email}}
           </span>
-          <input type="text" name="newEmail" *ngIf="contact.isEdditing" [(ngModel)]="contact.newEmail" required pattern="[a-zA-Z0-9_]+@[a-zA-Z0-9_.]+">
+          <input type="text" name="newEmail" *ngIf="contact.isEdditing" [(ngModel)]="contact.newEmail" required pattern="[a-zA-Z0-9_.]+@[a-zA-Z0-9_.]+\\.[a-zA-Z]+">
         </div>
 
         <div class="date col-sm-2">
