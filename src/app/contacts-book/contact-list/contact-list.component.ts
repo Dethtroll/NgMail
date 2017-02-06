@@ -94,7 +94,6 @@ export class ContactListComponent implements OnInit, OnDestroy {
           this.contacts.splice(index, 1);
         }
       });
-
   }
 
   selectAllRequested(){

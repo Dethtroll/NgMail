@@ -43,6 +43,17 @@ export class ContactsBookService {
       });
   }
 
+  addIfNotExist(email: string) {
+    let name = email.slice(0, email.indexOf('@'));
+    let existContact: Contact = null;
+    this.getAll()
+      .filter(contact => contact.email === email)
+      .subscribe(
+        contact => existContact = contact,  
+        undefined,
+        () => { if(existContact === null) { this.add(new Contact(name, email)).subscribe(x => x); }});
+  }
+
   update(contact: Contact): Observable<Contact> {
     return this.http.patch('http://test-api.javascript.ru/v1/dethtroll/users/'+contact._id, contact)
       .map(response => response.json())
