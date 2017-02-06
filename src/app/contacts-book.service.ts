@@ -1,11 +1,12 @@
 import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
+import { Http, Response } from '@angular/http';
 
 import { Observable } from 'rxjs/Observable';
-import 'rxjs/add/operator/map'
-import 'rxjs/add/operator/filter'
+import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/mergeMap';
+import 'rxjs/add/operator/filter';
 
-import { Contact } from './domain/contact'
+import { Contact } from './domain/contact';
 
 @Injectable()
 export class ContactsBookService {
@@ -52,11 +53,28 @@ export class ContactsBookService {
       });
   }
 
-  detete(contact: Contact): Observable<boolean> {
-    return this.http.delete('http://test-api.javascript.ru/v1/dethtroll/users/'+contact._id)
-      .map((response: any) => {
-        return response._body === "ok";})
-      .mergeMap((responce: boolean) => Observable.from([responce]))
+  // detete(contact: Contact): Observable<boolean> {
+  //   return this.http.delete('http://test-api.javascript.ru/v1/dethtroll/users/'+contact._id)
+  //     .map((response: any) => {
+  //       debugger;
+  //       return response._body === "ok";
+  //     })
+  //     .mergeMap((responce: boolean) => Observable.from([responce]))
+  //     .catch((error: any, t:Observable<any>) => {
+  //       console.error(error);
+  //       return Observable.throw(error);
+  //     });
+  // }
+
+  deleteMany(contacts: Contact[]): Observable<string> {
+    return Observable.from(contacts)
+      .map(contact => this.http.delete('http://test-api.javascript.ru/v1/dethtroll/users/'+contact._id))
+      .mergeMap(response => response)
+      .filter(response => response.ok)
+      .map(response => { 
+        debugger; 
+        return response.url.slice(response.url.lastIndexOf('/')+1)
+      })
       .catch((error: any, t:Observable<any>) => {
         console.error(error);
         return Observable.throw(error);

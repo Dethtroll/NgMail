@@ -31,7 +31,7 @@ export class ContactListComponent implements OnInit, OnDestroy {
     this.contacsService.getAll()
       .subscribe(item => { let dto = new ContactDto(item.fullName, item.email, item._id); this.addContact(dto); });
 
-    this._deleteSelectedObservable = this.controlPanel.deleteRequested.subscribe(this.deleteSelectedRequested);
+    this._deleteSelectedObservable = this.controlPanel.deleteRequested.subscribe(() => this.deleteSelectedRequested());
     this.controlPanel.selectedAll.subscribe(() => this.selectAllRequested());
     this.controlPanel.selectedNone.subscribe(() => this.selectNoneRequested());
   }
@@ -58,15 +58,13 @@ export class ContactListComponent implements OnInit, OnDestroy {
   }
 
   deleteRequested(contact: ContactDto) {
-    this.contacsService.detete(contact)
-      .subscribe((responce: boolean) => {
-        if(responce) {
-          let index = this.contacts.findIndex((currentDto: ContactDto) => currentDto._id == contact._id);
-          if(index >=0 ) {
-            this.contacts.splice(index, 1);
-          }
+    this.contacsService.deleteMany([contact])
+      .subscribe((responce: string) => {
+        let index = this.contacts.findIndex((currentDto: ContactDto) => currentDto._id == responce);
+        if(index >=0 ) {
+          this.contacts.splice(index, 1);
         }
-      })
+      });
   }
 
   selectChanged(event: boolean) {
@@ -75,7 +73,14 @@ export class ContactListComponent implements OnInit, OnDestroy {
   }
 
   deleteSelectedRequested() {
-    console.log("D")
+    let needDelete = this.contacts.filter(contact => contact.isChecked);
+    this.contacsService.deleteMany(needDelete)
+      .subscribe((responce: string) => {
+        let index = this.contacts.findIndex((currentDto: ContactDto) => currentDto._id == responce);
+        if(index >=0 ) {
+          this.contacts.splice(index, 1);
+        }
+      });
   }
 
   selectAllRequested(){
