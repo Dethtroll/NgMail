@@ -1,0 +1,13 @@
+.typeahead-container {
+}
+
+.typeahead-header {
+    width: 100%;
+}
+.typeahead-header input{
+    width: 100%;
+}
+
+.typeahead-item {
+    border: 1px solid black;
+}

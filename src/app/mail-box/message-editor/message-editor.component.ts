@@ -18,7 +18,7 @@ export class MessageEditorComponent implements OnInit {
   @ViewChild('f')
   myform: NgForm;
 
-  letter = {to: '', subject: '', body: ''};
+  letter = { to: '', subject: '', body: '' };
 
   constructor(
     private letterService: MailBoxLettersService, 
