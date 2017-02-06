@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 
 import { AppMode } from './domain/appMode';
 
@@ -26,11 +26,19 @@ export class AppComponent implements OnInit {
   deleteAvailable: boolean = false;
   moreActionsAvailable: boolean = false;
   
-  constructor(private router:Router, private controlPanel: ControlPanelService) {
+  constructor(
+    private router:Router,
+    private route: ActivatedRoute, 
+    private controlPanel: ControlPanelService) {
   }
 
   ngOnInit() {
     this.controlPanel.selectedCountChanged.subscribe(count => this.deleteAvailable = count > 0 );
+    console.log(this.route.url);
+      // if(params.mailBoxId != undefined)
+      // {
+      //   this.mailboxId = params.mailBoxId
+      // }
 
     this.selectedMode = this.modes[0];
     this.controlPanel.selectedCountChange(0);
@@ -45,7 +53,7 @@ export class AppComponent implements OnInit {
     }
     //if(mode == AppMode.Mail) {
     else {
-      this.router.navigate(['mailbox', 'inbox']);
+      this.router.navigate(['mailbox', '58920c6c9de15a250410f6ba']);
     }
   }
 

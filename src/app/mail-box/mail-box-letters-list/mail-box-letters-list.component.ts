@@ -60,7 +60,7 @@ export class MailBoxLettersListComponent implements OnInit, OnDestroy {
   }
 
   viewMessageRequested(letter: Letter): void {
-    //this.router.navigate(["/mailbox", letter.mailbox, "view", letter._id]);
+    this.router.navigate(["/mailbox", letter.mailbox, "view", letter._id]);
   }
 
   selectChanged(value: boolean) {

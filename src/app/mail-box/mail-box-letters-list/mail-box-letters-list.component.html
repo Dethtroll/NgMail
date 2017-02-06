@@ -1,6 +1,6 @@
 <div class="inbox col-sm-10">
   <ul class="list-unstyled">
-    <li class="email-item row unread" *ngFor="let letter of letters" (click)="viewMessageRequested(letter)">
+    <li class="email-item row unread" *ngFor="let letter of letters">
       <div class="people col-sm-3">
         <ul class="mail-icons list-inline">
           <li>
@@ -8,12 +8,12 @@
           </li>
         </ul>
 
-        <span class="people-names">
+        <span class="people-names" (click)="viewMessageRequested(letter)">
           {{letter.from}}
         </span>
       </div><!-- people -->
 
-      <div class="message col-sm-7">
+      <div class="message col-sm-7" (click)="viewMessageRequested(letter)">
         <div class="clipper">
           <h3>{{letter.subject}}</h3>
           -

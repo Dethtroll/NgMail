@@ -29,7 +29,7 @@ export class ControlPanelService {
   appModeChange(value: AppMode): void { this._appModeChanged.next(value); }
   searchValueChange(value: string): void { return this._searchValueChanged.next(value); }
   
-  selectedCountChange(value: number): void { console.log(value); return this._selectedCountChanged.next(value); }
+  selectedCountChange(value: number): void { return this._selectedCountChanged.next(value); }
   selectAllRaise(): void { return this._selectAll.next(); }
   selectNoneRaise(): void { return this._selectNone.next(); }
 

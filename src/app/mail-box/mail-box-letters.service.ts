@@ -7,12 +7,10 @@ import 'rxjs/add/operator/filter'
 
 import { Letter } from './../domain/letter'
 
-import { ContactsBookService } from './../contacts-book.service';
-
 @Injectable()
 export class MailBoxLettersService {
 
-  constructor(private http: Http, private contactService: ContactsBookService) { }
+  constructor(private http: Http) { }
 
   getAll(mailBoxName: string): Observable<Letter> {
     return this.http.get('http://test-api.javascript.ru/v1/dethtroll/letters')
@@ -42,16 +40,14 @@ export class MailBoxLettersService {
       });
   }
 
-  send(letter: Letter): void {
+  send(letter: Letter): Observable<Letter> {
     letter.mailbox = '58920c629de15a250410f6b9';
-    this.http.post('http://test-api.javascript.ru/v1/dethtroll/letters/', letter)
+    return this.http.post('http://test-api.javascript.ru/v1/dethtroll/letters/', letter)
+      .map(response => response.json())
       .catch((error: any, t:Observable<any>) => {
           console.error(error);
-          return Observable.throw(error);})
-      .subscribe(
-        x => console.log(x),
-        undefined,
-        () => this.contactService.addIfNotExist(letter.to));
+          return Observable.throw(error);
+      });
   }
 
   delete(letters: Letter[]): Observable<string> {
