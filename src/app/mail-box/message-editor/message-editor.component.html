@@ -5,7 +5,7 @@
     <div ngModelGroup="letter" #g="ngModelGroup">
       <div class="row">
         <span class="control-label col-sm-1">To:</span>
-        <input class="col-sm-11" type="email" name="to" placeholder="to" [ngModel]="letter.to" required contactTypeahead>
+        <input class="col-sm-11" type="email" name="to" placeholder="to" [(ngModel)]="letter.to" required contactTypeahead>
       </div>
       <div class="row">
         <span class="control-label col-sm-1">Subject:</span>

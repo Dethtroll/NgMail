@@ -1,4 +1,4 @@
-import { Component, ElementRef, ViewContainerRef, ViewChild, HostListener } from '@angular/core';
+import { Component, ElementRef, ViewChild, HostListener, Output, EventEmitter } from '@angular/core';
 
 import { Observable } from 'rxjs/Observable';
 import { Subject } from 'rxjs/Subject';
@@ -18,7 +18,7 @@ import { ContactsBookService } from './../../contacts-book.service';
 
  template: `
   <ng-content></ng-content>
-  <div #contentWrapper>
+  <div class="typeahead" #contentWrapper>
     <ul *ngIf="typeaheadVisible">
       <li *ngFor="let item of items" (click)="selectItem(item)">{{item}}</li>
     </ul>    
@@ -33,13 +33,15 @@ export class ContactTypeaheadDirective {
   @ViewChild('contentWrapper')
   content: ElementRef;
 
-  constructor(private viewContainerRef: ViewContainerRef, private contactsService: ContactsBookService) {    
+  @Output() 
+  ngModelChange: EventEmitter<any> = new EventEmitter(false);
+
+  constructor(private viewContainerRef: ElementRef, private contactsService: ContactsBookService) {    
     this.searchData
       .debounceTime(300)
       .distinctUntilChanged()
       .subscribe(
-        (filter: string) => { 
-          console.log(filter)
+        (filter: string) => {
            filter = (filter || '').trim();
            if(filter.length > 2) {
               this.contactsService.find(filter, 5)
@@ -60,24 +62,13 @@ export class ContactTypeaheadDirective {
   }
 
   private selectItem(value:string) {
-    debugger;
-    this.viewContainerRef.element.nativeElement.value = value;
+    this.viewContainerRef.nativeElement.value = value;
+    this.ngModelChange.emit(value);
     this.searchData.next(undefined);
   }
 
   public ngAfterViewInit() {
-
-     let input = this.viewContainerRef.element.nativeElement;
-     let div = document.createElement("div");
-     div.className = "typeahead";
-     input.parentElement.insertBefore(div, input.nextSibling);
-    
-    //div.appendChild(input);
-    
-
-     div.appendChild(this.content.nativeElement);
-
-
-      this.viewContainerRef.element.nativeElement.value = 'asdf@asdf.asdf';
+     let input = this.viewContainerRef.nativeElement;
+     input.parentElement.insertBefore(this.content.nativeElement, input.nextSibling);
   }
 }
