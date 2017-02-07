@@ -3,6 +3,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 
 import { AppMode } from './domain/appMode';
 
+import { AuthStorageService } from './auth-storage.service';
 import { ContactsBookService } from './contacts-book.service';
 import { ControlPanelService } from './control-panel.service';
 
@@ -20,6 +21,7 @@ export class AppComponent implements OnInit {
     {id: AppMode.Contacts, title: "Contacts"},
   ];
   selectedMode: any;
+  isLoggedIn: boolean;
 
   navigateBackAvailable: boolean = false;
   selectManyAvailable: boolean = true;
@@ -29,7 +31,8 @@ export class AppComponent implements OnInit {
   constructor(
     private router:Router,
     private route: ActivatedRoute, 
-    private controlPanel: ControlPanelService) {
+    private controlPanel: ControlPanelService,
+    private authService: AuthStorageService) {
   }
 
   ngOnInit() {
@@ -38,6 +41,9 @@ export class AppComponent implements OnInit {
       // {
       //   this.mailboxId = params.mailBoxId
       // }
+
+    this.isLoggedIn = this.authService.isLoggedIn;
+    this.authService.LoggedInSubject.subscribe(authStatus => this.isLoggedIn = authStatus);
 
     this.selectedMode = this.modes[0];
     this.controlPanel.selectedCountChange(0);

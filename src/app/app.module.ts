@@ -23,8 +23,9 @@ import { AuthGuardService } from './auth-guard.service';
 
 
 // определение маршрутов
+const defaultMailBox = '58920c6c9de15a250410f6ba';
 const appRoutes: Routes =[
-    { path: '', redirectTo: '/mailbox/0', pathMatch: 'full'},
+    { path: '', redirectTo: '/mailbox/'+defaultMailBox, pathMatch: 'full'},
     { path: 'login', component: AccountComponent },
 
     { path: 'mailbox/:mailBoxId', component: MailBoxComponent,    canLoad: [AuthGuardService], canActivate : [AuthGuardService], canActivateChild : [AuthGuardService],
@@ -34,7 +35,7 @@ const appRoutes: Routes =[
         { path: 'view/:letterId', component: MessageViewerComponent}
       ]},
     { path: 'contacts', component: ContactsBookComponent,         canLoad: [AuthGuardService], canActivate : [AuthGuardService], canActivateChild : [AuthGuardService] },
-    { path: '**', redirectTo: '/mailbox/0' }
+    { path: '**', redirectTo: '/mailbox/'+defaultMailBox }
 ];
 
 @NgModule({

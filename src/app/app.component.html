@@ -4,7 +4,7 @@
       <img src="images/google.png" alt="Google">
     </div><!-- logo -->
 
-    <div class="search-bar col-sm-6">
+    <div class="search-bar col-sm-6" *ngIf="isLoggedIn">
       <div class="input-group">
         <input type="text" class="form-control" placeholder="Search for..." (input)="searchValueEntered($event.target.value)">
         <span class="input-group-btn">
@@ -13,11 +13,9 @@
           </button>
         </span>
       </div><!-- /input-group -->
-
-      <span class="arrow caret"></span>
     </div><!-- search-bar -->
 
-    <div class="profile col-sm-4">
+    <div class="profile col-sm-4"  *ngIf="isLoggedIn">
       <ul class="profile-icons list-inline pull-right">
         <li>Nizar</li>
         <li>
@@ -33,7 +31,7 @@
     </div><!-- profile -->
   </header>
 
-  <div class="control-bar row">
+  <div class="control-bar row" *ngIf="isLoggedIn">
     <div class="menu col-sm-2">
 
       <div class="ng-dropdown ">

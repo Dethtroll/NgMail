@@ -1,15 +1,20 @@
-<div class="panel panel-default col-sm-3" *ngIf = "!authStorageService.isLoggedIn">
+<div class="col-sm-4"></div>
+
+<div class="panel panel-default col-sm-4 text-center" *ngIf = "!authStorageService.isLoggedIn">
 
   <div class="input-group">
     <span class="input-group-addon" id="basic-login">Login</span>
-    <input type="text" class="form-control" placeholder="Username" aria-describedby="basic-login" [ngModel]="login">
+    <input type="text" class="form-control" aria-describedby="basic-login" [ngModel]="login">
   </div>
   <div class="input-group">
     <span class="input-group-addon" id="basic-pass">Pass</span>
-    <input type="password" class="form-control" placeholder="Username" aria-describedby="basic-pass" [ngModel]="password">
+    <input type="password" class="form-control" aria-describedby="basic-pass" [ngModel]="password">
   </div>
 
   <div class="input-group">
       <button class="compose btn btn-danger" (click)="signIn()">Login</button>
   </div>
+
 </div>
+
+<div class="col-sm-4"></div>
