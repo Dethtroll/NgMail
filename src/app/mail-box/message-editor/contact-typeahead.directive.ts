@@ -13,21 +13,6 @@ import { Contact } from './../../domain/contact';
 
 import { ContactsBookService } from './../../contacts-book.service';
 
-/*
-<div class="typeahead-container">
-
-  <div class="typeahead-header">
-    <input (input)="inputHandler()" [(ngModel)]="filter" />
-  </div>
-  <div class="typeahead-items">
-    <div *ngFor="let item of items" (click)="itemClickHandler(item.email)" class="typeahead-item">
-      {{item.fullName}} - {{item.email}}
-    </div>
-  </div>
-
-</div>
- */
-
 @Component({
   selector: '[contactTypeahead]',
 
@@ -35,59 +20,64 @@ import { ContactsBookService } from './../../contacts-book.service';
   <ng-content></ng-content>
   <div #contentWrapper>
     <ul *ngIf="typeaheadVisible">
-      <li *ngFor="let item of items | async" (click)="selectItem(item)">{{item}}</li>
+      <li *ngFor="let item of items" (click)="selectItem(item)">{{item}}</li>
     </ul>    
-  </div>
-  `
+  </div>`
 })
 export class ContactTypeaheadDirective {
   
   private typeaheadVisible: boolean = false;
-  private items: Observable<string[]>;
+  private items: string[];
   private searchData = new Subject<string>();
 
   @ViewChild('contentWrapper')
   content: ElementRef;
 
-  constructor(private viewContainerRef: ViewContainerRef, private contactsService: ContactsBookService) {
-    //, private contactsService: ContactsBookService
-    // this.contactsService.getAll()
-    // .filter(contact => contact.email.toLowerCase().indexOf(this.filter.toLowerCase()) !== -1)
-    // .subscribe(contact => this.items.push(contact)); 
-    
-    this.items = this.searchData
+  constructor(private viewContainerRef: ViewContainerRef, private contactsService: ContactsBookService) {    
+    this.searchData
       .debounceTime(300)
       .distinctUntilChanged()
-      .switchMap(
-        (filter: string) => 
-        { 
-           filter = (filter ||'').trim();
-           if(filter.length > 2){
-              return this.contactsService.find(filter, 5);
+      .subscribe(
+        (filter: string) => { 
+          console.log(filter)
+           filter = (filter || '').trim();
+           if(filter.length > 2) {
+              this.contactsService.find(filter, 5)
+                .subscribe(items => {                  
+                  this.items = items;
+                  this.typeaheadVisible = items.length > 0;
+                });
            }
-           return Observable.of<string[]>([]);
-        });
+           else {
+             this.items = [];
+             this.typeaheadVisible = false;
+           }
+      });
   }
 
-
   @HostListener('input', ['$event']) oninput(event: any) {
-    console.log(event.target.value);
     this.searchData.next(event.target.value);
   }
 
   private selectItem(value:string) {
+    debugger;
     this.viewContainerRef.element.nativeElement.value = value;
-    this.searchData.next(undefined); 
+    this.searchData.next(undefined);
   }
 
   public ngAfterViewInit() {
-    //обернем input div-ом
-    let el = this.viewContainerRef.element.nativeElement;
-    let divEl = document.createElement("div");
-    divEl.className = "typeahead";
-    el.parentElement.insertBefore(divEl, el.nextSibling);
-    divEl.appendChild(el);
-    //и к этому div-у добавим content
-    divEl.appendChild(this.content.nativeElement);
+
+     let input = this.viewContainerRef.element.nativeElement;
+     let div = document.createElement("div");
+     div.className = "typeahead";
+     input.parentElement.insertBefore(div, input.nextSibling);
+    
+    //div.appendChild(input);
+    
+
+     div.appendChild(this.content.nativeElement);
+
+
+      this.viewContainerRef.element.nativeElement.value = 'asdf@asdf.asdf';
   }
 }
