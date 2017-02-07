@@ -25,17 +25,17 @@
         </div>
 
         <div class="date col-sm-2">
-          <button type="submit" class="btn btn-xs" *ngIf="contact.isEdditing">
-            <span class="glyphicon glyphicon-ok"></span>
+          <button type="button" class="btn btn-xs pull-right" *ngIf="!contact.isEdditing" (click)="deleteRequested(contact)">
+            <span class="glyphicon glyphicon-trash"></span>
           </button>
-          <button type="reset" class="btn btn-xs" *ngIf="contact.isEdditing" (click)="contact.isEdditing = false; contact.cancelEdit();">
-            <span class="glyphicon glyphicon-remove"></span>
-          </button>
-          <button type="button" class="btn btn-xs" *ngIf="!contact.isEdditing" (click)="contact.isEdditing = true">
+          <button type="button" class="btn btn-xs pull-right" *ngIf="!contact.isEdditing" (click)="contact.isEdditing = true">
             <span class="glyphicon glyphicon-pencil"></span>
           </button>
-          <button type="button" class="btn btn-xs" *ngIf="!contact.isEdditing" (click)="deleteRequested(contact)">
-            <span class="glyphicon glyphicon-trash"></span>
+          <button type="reset" class="btn btn-xs pull-right" *ngIf="contact.isEdditing" (click)="contact.isEdditing = false; contact.cancelEdit();">
+            <span class="glyphicon glyphicon-remove"></span>
+          </button>
+          <button type="submit" class="btn btn-xs pull-right" *ngIf="contact.isEdditing">
+            <span class="glyphicon glyphicon-ok"></span>
           </button>
         </div>
       </form>

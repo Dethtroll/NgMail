@@ -1,4 +1,4 @@
-<div class="inbox col-sm-10">
+<div class="inbox col-sm-9 panel panel-default">
   <ul class="list-unstyled">
     <li class="email-item row unread" *ngFor="let letter of letters|mailBoxLettersFilter:filterValue">
       <div class="people col-sm-3">
@@ -22,7 +22,7 @@
       </div><!-- message -->
 
       <div class="date col-sm-2">
-        <button class="btn btn-xs" (click)="deleteRequested(letter)">
+        <button class="btn btn-xs pull-right" (click)="deleteRequested(letter)">
           <span class="glyphicon glyphicon-trash"></span>
         </button>
       </div><!-- date -->
