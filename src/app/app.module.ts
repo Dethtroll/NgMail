@@ -17,18 +17,24 @@ import { AddContactComponent } from './contacts-book/add-contact/add-contact.com
 import { ContactFilterPipe } from './contacts-book/contact-list/contact-filter.pipe';
 import { MailBoxLettersFilterPipe } from './mail-box/mail-box-letters-list/mail-box-letters-filter.pipe';
 import { ContactTypeaheadDirective } from './mail-box/message-editor/contact-typeahead.directive';
+import { AccountComponent } from './account/account.component';
+import { AuthStorageService } from './auth-storage.service';
+import { AuthGuardService } from './auth-guard.service';
+
 
 // определение маршрутов
 const appRoutes: Routes =[
-    { path: '', component: MailBoxComponent},
-    { path: 'mailbox/:mailBoxId', component: MailBoxComponent,
+    { path: '', redirectTo: '/mailbox/0', pathMatch: 'full'},
+    { path: 'login', component: AccountComponent },
+
+    { path: 'mailbox/:mailBoxId', component: MailBoxComponent,    canLoad: [AuthGuardService], canActivate : [AuthGuardService], canActivateChild : [AuthGuardService],
       children:[
         { path: '', component: MailBoxLettersListComponent },
         { path: 'new', component: MessageEditorComponent},
         { path: 'view/:letterId', component: MessageViewerComponent}
       ]},
-    { path: 'contacts', component: ContactsBookComponent},
-    { path: '**', component: MailBoxComponent }
+    { path: 'contacts', component: ContactsBookComponent,         canLoad: [AuthGuardService], canActivate : [AuthGuardService], canActivateChild : [AuthGuardService] },
+    { path: '**', redirectTo: '/mailbox/0' }
 ];
 
 @NgModule({
@@ -46,6 +52,7 @@ const appRoutes: Routes =[
     ContactFilterPipe,
     MailBoxLettersFilterPipe,
     ContactTypeaheadDirective,
+    AccountComponent,
   ],
   imports: [
     BrowserModule,
@@ -54,7 +61,7 @@ const appRoutes: Routes =[
     HttpModule,
     RouterModule.forRoot(appRoutes, {useHash: true})
   ],
-  providers: [],
+  providers: [ AuthStorageService, AuthGuardService ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

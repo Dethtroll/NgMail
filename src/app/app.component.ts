@@ -34,7 +34,6 @@ export class AppComponent implements OnInit {
 
   ngOnInit() {
     this.controlPanel.selectedCountChanged.subscribe(count => this.deleteAvailable = count > 0 );
-    console.log(this.route.url);
       // if(params.mailBoxId != undefined)
       // {
       //   this.mailboxId = params.mailBoxId
