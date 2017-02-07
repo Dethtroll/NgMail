@@ -3,8 +3,9 @@ import { Http, Response } from '@angular/http';
 
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
-import 'rxjs/add/operator/mergeMap';
+import 'rxjs/add/operator/take';
 import 'rxjs/add/operator/filter';
+import 'rxjs/add/operator/mergeMap';
 
 import { Contact } from './domain/contact';
 
@@ -17,6 +18,16 @@ export class ContactsBookService {
     return this.http.get('http://test-api.javascript.ru/v1/dethtroll/users')
       .map(response => response.json())
       .mergeMap((contacts: Contact[]) => Observable.from(contacts))
+      .catch((error: any, t:Observable<any>) => {
+        console.error(error);
+        return Observable.throw(error);
+      });
+  }
+
+  find(value: string, limit: number = 5): Observable<string[]> {
+    return this.http.get('http://test-api.javascript.ru/v1/dethtroll/users')
+      .map(response => response.json())
+      .map((contacts: Contact[]) => contacts.map(contact => contact.email).filter(email => email.toLowerCase().indexOf(value.toLowerCase()) !== -1).slice(0, limit))
       .catch((error: any, t:Observable<any>) => {
         console.error(error);
         return Observable.throw(error);

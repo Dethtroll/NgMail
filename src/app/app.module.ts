@@ -16,7 +16,7 @@ import { ContactListComponent } from './contacts-book/contact-list/contact-list.
 import { AddContactComponent } from './contacts-book/add-contact/add-contact.component';
 import { ContactFilterPipe } from './contacts-book/contact-list/contact-filter.pipe';
 import { MailBoxLettersFilterPipe } from './mail-box/mail-box-letters-list/mail-box-letters-filter.pipe';
-import { ContactTypeaheadComponent } from './mail-box/message-editor/contact-typeahead/contact-typeahead.component';
+import { ContactTypeaheadDirective } from './mail-box/message-editor/contact-typeahead.directive';
 
 // определение маршрутов
 const appRoutes: Routes =[
@@ -45,7 +45,7 @@ const appRoutes: Routes =[
     AddContactComponent,
     ContactFilterPipe,
     MailBoxLettersFilterPipe,
-    ContactTypeaheadComponent,
+    ContactTypeaheadDirective,
   ],
   imports: [
     BrowserModule,

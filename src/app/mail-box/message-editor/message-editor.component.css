@@ -16,3 +16,20 @@ textarea{
 input {
     width: 100%;
 }
+
+.typeahead div {
+    position: absolute;
+    top: 46px;
+    left: 167px;
+    z-index: 10;
+}
+
+.typeahead div ul {
+    background: white;
+    border: 1px black solid;
+    padding: 4px 10px 0px 30px;
+}
+
+.typeahead div li {
+    border-bottom: 1px solid black;
+}
