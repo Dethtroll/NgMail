@@ -9,7 +9,6 @@ import 'rxjs/add/operator/map'
 @Component({
   selector: 'app-mail-box-list',
   templateUrl: './mail-box-list.component.html',
-  styleUrls: ['./mail-box-list.component.css'],
   providers: [MailBoxListService],
   encapsulation: ViewEncapsulation.None
 })

@@ -6,7 +6,6 @@ import { MailBoxLettersService } from './mail-box-letters.service'
 @Component({
   selector: 'app-mail-box',
   templateUrl: './mail-box.component.html',
-  styleUrls: ['./mail-box.component.css'],
   providers: [MailBoxLettersService],
   encapsulation: ViewEncapsulation.None
 })
