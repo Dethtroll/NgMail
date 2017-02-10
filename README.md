@@ -6,7 +6,7 @@ This project was generated with [angular-cli](https://github.com/angular/angular
 ## ReST service:
 Ducumentation: http://test-api.javascript.ru/v1/
 
-Url:    
+Url:
 Letters - http://test-api.javascript.ru/v1/dethtroll/letters
 Mailboxes - http://test-api.javascript.ru/v1/dethtroll/mailboxes
 Contacts - http://test-api.javascript.ru/v1/dethtroll/users

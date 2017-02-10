@@ -1,8 +1,8 @@
   <div class="row">
-    <textarea class="reply-form" rows="10" placeholder="reply" [(ngModel)]="replyBody"></textarea>
+    <textarea class="reply-form" rows="10" placeholder="reply" #replyBody></textarea>
   </div>
   <div class="row">
-    <button class="btn btn-primary" (click)="sendReplyRequested()">
+    <button class="btn btn-primary" (click)="sendReplyRequested(replyBody.value);">
       <span>Send</span>
     </button>
   </div>

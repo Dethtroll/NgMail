@@ -2,25 +2,29 @@ import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
 
 import { Observable } from 'rxjs/Observable';
-import 'rxjs/add/operator/map'
-import 'rxjs/add/operator/filter'
+import 'rxjs/add/observable/throw';
+import 'rxjs/add/observable/from';
+import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/mergeMap';
+import 'rxjs/add/operator/filter';
+import 'rxjs/add/operator/catch';
 
-import { Letter } from './../domain/letter'
+import { Letter } from './../domain/letter';
 
 @Injectable()
 export class MailBoxLettersService {
 
   constructor(private http: Http) { }
 
-  getAll(mailBoxName: string): Observable<Letter> {
-    return this.http.get('http://test-api.javascript.ru/v1/dethtroll/letters')
+  getAll(mailBoxId: string): Observable<Letter> {
+    return this.http.get('http://test-api.javascript.ru/v1/dethtroll/letters/')
       .map(response => response.json())
       .mergeMap((letters: Letter[]) => Observable.from(
         letters.map((l: Letter) => { 
           let letter = new Letter(l.subject, l.body, l.to, l.mailbox, l._id);
           return letter;
         })))
-      .filter(letter => letter.mailbox == mailBoxName)
+      .filter(letter => letter.mailbox == mailBoxId)
       .catch((error: any, t:Observable<any>) => {
         console.error(error);
         return Observable.throw(error);

@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 
 import { Letter } from './../../../domain/letter';
@@ -16,8 +17,6 @@ export class ReplyFormComponent implements OnInit {
   @Input()
   sourceLetter: Letter;
 
-  replyBody: string;
-
   constructor(
     private letterService: MailBoxLettersService, 
     private contactService: ContactsBookService,
@@ -26,10 +25,10 @@ export class ReplyFormComponent implements OnInit {
   ngOnInit() {
   }
 
-  sendReplyRequested() {
+  sendReplyRequested(replyBody: string) {
     let letterId = null;
     let mailboxId = null;
-    this.letterService.send(new Letter(this.sourceLetter.subject, this.replyBody, this.sourceLetter.from))
+    this.letterService.send(new Letter(this.sourceLetter.subject, replyBody, this.sourceLetter.from))
       .subscribe(
         sendedLetter => { 
           letterId = sendedLetter._id;
@@ -38,6 +37,6 @@ export class ReplyFormComponent implements OnInit {
         undefined,
         () => {
           this.router.navigate(["/mailbox", mailboxId, 'view', letterId]);
-          this.replyBody = ''});
+        });
   }
 }

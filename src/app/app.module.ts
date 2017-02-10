@@ -1,5 +1,5 @@
-import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule  } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { Routes, RouterModule } from '@angular/router';
@@ -21,7 +21,6 @@ import { AccountComponent } from './account/account.component';
 import { AuthStorageService } from './auth-storage.service';
 import { AuthGuardService } from './auth-guard.service';
 
-
 // определение маршрутов
 const defaultMailBox = '58920c6c9de15a250410f6ba';
 const appRoutes: Routes =[
@@ -39,28 +38,28 @@ const appRoutes: Routes =[
 ];
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    MessageEditorComponent,
-    MessageViewerComponent,
-    MailBoxComponent,
-    MailBoxListComponent,
-    MailBoxLettersListComponent,
-    ReplyFormComponent,
-    ContactsBookComponent,
-    ContactListComponent,
-    AddContactComponent,
-    ContactFilterPipe,
-    MailBoxLettersFilterPipe,
-    ContactTypeaheadDirective,
-    AccountComponent,
-  ],
   imports: [
     BrowserModule,
     FormsModule,
     ReactiveFormsModule,
     HttpModule,
     RouterModule.forRoot(appRoutes, {useHash: true})
+  ],
+  declarations: [
+    ContactFilterPipe,
+    MailBoxLettersFilterPipe,
+    ContactTypeaheadDirective,
+    ReplyFormComponent,
+    MessageViewerComponent,
+    MessageEditorComponent,
+    MailBoxLettersListComponent,
+    MailBoxListComponent,
+    MailBoxComponent,
+    AddContactComponent,
+    ContactListComponent,
+    ContactsBookComponent,
+    AccountComponent,
+    AppComponent,
   ],
   providers: [ AuthStorageService, AuthGuardService ],
   bootstrap: [AppComponent]
