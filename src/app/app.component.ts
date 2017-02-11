@@ -37,10 +37,6 @@ export class AppComponent implements OnInit {
 
   ngOnInit() {
     this.controlPanel.selectedCountChanged.subscribe(count => this.deleteAvailable = count > 0 );
-      // if(params.mailBoxId != undefined)
-      // {
-      //   this.mailboxId = params.mailBoxId
-      // }
 
     this.isLoggedIn = this.authService.isLoggedIn;
     this.authService.LoggedInSubject.subscribe(authStatus => this.isLoggedIn = authStatus);

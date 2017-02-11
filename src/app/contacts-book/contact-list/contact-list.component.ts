@@ -108,8 +108,4 @@ export class ContactListComponent implements OnInit, OnDestroy {
     this.contacts.forEach(value => value.isChecked = false);
     this.selectedCount = 0;
   }
-
-  //   viewMessageRequested(letter: Letter): void {
-  //   this.router.navigate(["/mailbox", letter.mailbox, "view", letter._id]);
-  // }
 }

@@ -30,7 +30,6 @@ export class MessageEditorComponent implements OnInit {
 
   onSubmit(form: NgForm){
     if(form.valid) {
-      debugger;
       let letter = form.value.letter;
       let letterId = null;
       let mailboxId = null;
