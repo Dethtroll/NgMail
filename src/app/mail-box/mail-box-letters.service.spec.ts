@@ -8,7 +8,7 @@ import { Letter } from './../domain/letter';
 
 import { MailBoxLettersService } from './mail-box-letters.service';
 
-let lettersApiUrl: string = 'http://test-api.javascript.ru/v1/dethtroll/letters/';
+let lettersApiUrl: string = 'https://test-api.javascript.ru/v1/dethtroll/letters/';
 let inboxId: string = '58920c6c9de15a250410f6ba';
 let sentId: string = '58920c629de15a250410f6b9';
 let inboxLetter = new Letter('Test sbj', 'Test body', 'karba@local', inboxId, '5');

@@ -16,7 +16,7 @@ export class MailBoxListService {
 
   get():Observable<MailBox>
   {
-    return this.http.get('http://test-api.javascript.ru/v1/dethtroll/mailboxes')
+    return this.http.get('https://test-api.javascript.ru/v1/dethtroll/mailboxes')
       .map(response => response.json())
       .mergeMap((mailBoxes: MailBox[]) => Observable.from(mailBoxes))
       .catch((error: any, t:Observable<any>) => {

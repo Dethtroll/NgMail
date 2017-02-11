@@ -15,7 +15,7 @@ export class ContactsBookService {
   constructor(private http: Http) { }
 
   getAll(): Observable<Contact> {
-    return this.http.get('http://test-api.javascript.ru/v1/dethtroll/users')
+    return this.http.get('https://test-api.javascript.ru/v1/dethtroll/users')
       .map(response => response.json())
       .mergeMap((contacts: Contact[]) => Observable.from(contacts))
       .catch((error: any, t:Observable<any>) => {
@@ -25,7 +25,7 @@ export class ContactsBookService {
   }
 
   find(value: string, limit: number = 5): Observable<string[]> {
-    return this.http.get('http://test-api.javascript.ru/v1/dethtroll/users')
+    return this.http.get('https://test-api.javascript.ru/v1/dethtroll/users')
       .map(response => response.json())
       .map((contacts: Contact[]) => contacts.map(contact => contact.email).filter(email => email.toLowerCase().indexOf(value.toLowerCase()) !== -1).slice(0, limit))
       .catch((error: any, t:Observable<any>) => {
@@ -35,7 +35,7 @@ export class ContactsBookService {
   }
 
   get(contactId: string): Observable<Contact> {
-    return this.http.get('http://test-api.javascript.ru/v1/dethtroll/users/'+contactId)
+    return this.http.get('https://test-api.javascript.ru/v1/dethtroll/users/'+contactId)
       .map(response => response.json())
       .mergeMap((contact: Contact) => Observable.from([contact]))
       .catch((error: any, t:Observable<any>) => {
@@ -45,7 +45,7 @@ export class ContactsBookService {
   }
 
   add(contact: Contact): Observable<Contact> {
-    return this.http.post('http://test-api.javascript.ru/v1/dethtroll/users/', contact)
+    return this.http.post('https://test-api.javascript.ru/v1/dethtroll/users/', contact)
       .map(response => response.json())
       .mergeMap((contact: Contact) => Observable.from([contact]))
       .catch((error: any, t:Observable<any>) => {
@@ -66,7 +66,7 @@ export class ContactsBookService {
   }
 
   update(contact: Contact): Observable<Contact> {
-    return this.http.patch('http://test-api.javascript.ru/v1/dethtroll/users/'+contact._id, contact)
+    return this.http.patch('https://test-api.javascript.ru/v1/dethtroll/users/'+contact._id, contact)
       .map(response => response.json())
       .mergeMap((contact: Contact) => Observable.from([contact]))
       .catch((error: any, t:Observable<any>) => {
@@ -77,7 +77,7 @@ export class ContactsBookService {
 
   delete(contacts: Contact[]): Observable<string> {
     return Observable.from(contacts)
-      .map(contact => this.http.delete('http://test-api.javascript.ru/v1/dethtroll/users/'+contact._id))
+      .map(contact => this.http.delete('https://test-api.javascript.ru/v1/dethtroll/users/'+contact._id))
       .mergeMap(response => response)
       .filter(response => response.ok)
       .map(response => { 

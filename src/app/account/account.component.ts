@@ -10,8 +10,8 @@ import { AuthStorageService } from './../auth-storage.service';
 })
 export class AccountComponent implements OnInit {
 
-  login: string;
-  password: string;
+  login: string = "dethtroll";
+  password: string = "password";
 
   constructor(private authStorageService: AuthStorageService, private router: Router) { }
 

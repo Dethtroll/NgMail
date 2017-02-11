@@ -3,16 +3,19 @@ Course project for Angular 2
 
 This project was generated with [angular-cli](https://github.com/angular/angular-cli) version 1.0.0-beta.22-1.
 
+## Github pages
+https://dethtroll.github.io
+
 ## ReST service:
-Ducumentation: http://test-api.javascript.ru/v1/
+Ducumentation: https://test-api.javascript.ru/v1/
 
 Url:
 
-Letters - http://test-api.javascript.ru/v1/dethtroll/letters
+Letters - https://test-api.javascript.ru/v1/dethtroll/letters
 
-Mailboxes - http://test-api.javascript.ru/v1/dethtroll/mailboxes
+Mailboxes - https://test-api.javascript.ru/v1/dethtroll/mailboxes
 
-Contacts - http://test-api.javascript.ru/v1/dethtroll/users
+Contacts - https://test-api.javascript.ru/v1/dethtroll/users
 
 
 ## Build

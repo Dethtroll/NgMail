@@ -17,7 +17,7 @@ export class MailBoxLettersService {
   constructor(private http: Http) { }
 
   getAll(mailBoxId: string): Observable<Letter> {
-    return this.http.get('http://test-api.javascript.ru/v1/dethtroll/letters/')
+    return this.http.get('https://test-api.javascript.ru/v1/dethtroll/letters/')
       .map(response => response.json())
       .mergeMap((letters: Letter[]) => Observable.from(
         letters.map((l: Letter) => { 
@@ -32,7 +32,7 @@ export class MailBoxLettersService {
   }
 
   get(letterId: string): Observable<Letter> {
-    return this.http.get('http://test-api.javascript.ru/v1/dethtroll/letters/'+letterId)
+    return this.http.get('https://test-api.javascript.ru/v1/dethtroll/letters/'+letterId)
       .map(response => response.json())
       .mergeMap((l: Letter) => {
         let letter = new Letter(l.subject, l.body, l.to, l.mailbox, l._id);
@@ -46,7 +46,7 @@ export class MailBoxLettersService {
 
   send(letter: Letter): Observable<Letter> {
     letter.mailbox = '58920c629de15a250410f6b9';
-    return this.http.post('http://test-api.javascript.ru/v1/dethtroll/letters/', letter)
+    return this.http.post('https://test-api.javascript.ru/v1/dethtroll/letters/', letter)
       .map(response => response.json())
       .catch((error: any, t:Observable<any>) => {
           console.error(error);
@@ -56,7 +56,7 @@ export class MailBoxLettersService {
 
   delete(letters: Letter[]): Observable<string> {
     return Observable.from(letters)
-      .map(letter => this.http.delete('http://test-api.javascript.ru/v1/dethtroll/letters/'+letter._id))
+      .map(letter => this.http.delete('https://test-api.javascript.ru/v1/dethtroll/letters/'+letter._id))
       .mergeMap(response => response)
       .filter(response => response.ok)
       .map(response => { 
